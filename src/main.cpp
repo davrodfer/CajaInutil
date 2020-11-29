@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <main.h>
 #include <ronquido.h>
+#include <flashLed.h>
 
 void setup() {
   Serial.begin(SERIALSPEED);
@@ -10,5 +11,6 @@ void setup() {
 }
 
 void loop() {
-  ronquido(Led);
+  // ronquido(Led);
+  flashLed(Led,80);
 }
