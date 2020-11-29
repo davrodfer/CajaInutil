@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <main.h>
+#include <ronquido.h>
 
 void setup() {
   Serial.begin(SERIALSPEED);
@@ -9,8 +10,5 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(Led, LOW);
-  delay(200);
-  digitalWrite(Led, HIGH);
-  delay(200);
+  ronquido(Led);
 }
