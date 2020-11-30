@@ -1,35 +1,37 @@
 #include <ronquido.h>
 #include <Arduino.h>
 
-void ronquidoON(int GPIOLed){
-  for (int i=0; i<256; i++){
-    analogWrite(GPIOLed,i);
-    delay(duracionRonquidoPaso);
-  }
-
-}
-void ronquidoOFF(int GPIOLed){
-  for (int i=255; i>=0; i--){
-    analogWrite(GPIOLed,i);
-    delay(duracionRonquidoPaso);
-  }
-}
-
 void ronquido(int GPIOLed){
   static unsigned long last=0;
   static bool off = true;
-  int duracion = off ? duracionRonquidoOff : duracionRonquidoOn;
+  static int intensidad = 0;
+  int duracion = 1;
+
+  if (
+      (intensidad > RonquidoMinIntensidad) && 
+      (intensidad < RonquidoMaxIntensidad)
+  ){ //esta en proceso de moverse
+    duracion = duracionRonquidoPaso;
+  }else if (off){
+    duracion = duracionRonquidoOff;
+  }else{
+    duracion = duracionRonquidoOn;
+  }
 
   if (millis() < (last + duracion )){
     return;
   }
 
-  if (off){
-    ronquidoON(GPIOLed);
-    off=false;
-  }else{
-    ronquidoOFF(GPIOLed);
-    off=true;
+  intensidad += (off ? RonquidoPasoIntensidad : -RonquidoPasoIntensidad);
+  intensidad = intensidad > RonquidoMaxIntensidad ? RonquidoMaxIntensidad : intensidad;
+  intensidad = intensidad < RonquidoMinIntensidad ? RonquidoMinIntensidad : intensidad;
+  analogWrite(GPIOLed,intensidad);
+  if (intensidad <= RonquidoMinIntensidad){
+    off = true;
   }
+  if (intensidad >= RonquidoMaxIntensidad){
+    off = false;
+  }
+
   last = millis();
 }

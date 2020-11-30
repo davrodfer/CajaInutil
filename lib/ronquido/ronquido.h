@@ -8,6 +8,17 @@
 #define duracionRonquidoPaso 5
 #endif
 
+#ifndef RonquidoMaxIntensidad
+#define RonquidoMaxIntensidad 200
+#endif
+
+#ifndef RonquidoMinIntensidad
+#define RonquidoMinIntensidad 0
+#endif
+
+#ifndef RonquidoPasoIntensidad
+#define RonquidoPasoIntensidad 1
+#endif
+
+
 void ronquido(int GPIOLed);
-void ronquidoON(int GPIOLed);
-void ronquidoOFF(int GPIOLed);
