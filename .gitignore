@@ -6,3 +6,5 @@
 include/README
 lib/README
 test/README
+**.FCStd1
+**.gcode
