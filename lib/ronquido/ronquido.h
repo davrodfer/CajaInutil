@@ -5,7 +5,7 @@
 #define duracionRonquidoOff 2200
 #endif
 #ifndef duracionRonquidoPaso
-#define duracionRonquidoPaso 5
+#define duracionRonquidoPaso 8
 #endif
 
 #ifndef RonquidoMaxIntensidad

@@ -7,6 +7,8 @@ void ronquido(int GPIOLed){
   static int intensidad = 0;
   int duracion = 1;
 
+  last = last > millis() ? millis() : last;
+
   if (
       (intensidad > RonquidoMinIntensidad) && 
       (intensidad < RonquidoMaxIntensidad)
